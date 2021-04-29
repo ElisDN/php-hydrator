@@ -14,14 +14,17 @@ class Hydrator
     private $reflectionClassMap;
 
     /**
-     * @param string|object $target
+     * @template T
+     * @param class-string<T> $target
      * @param array $data
-     * @return object
+     * @return T
      * @throws \ReflectionException
      */
     public function hydrate($target, array $data)
     {
         $reflection = $this->getReflectionClass($target);
+
+        /** @var T $object */
         $object = is_object($target) ? $target : $reflection->newInstanceWithoutConstructor();
 
         foreach ($data as $name => $value) {
