@@ -79,13 +79,13 @@ class SqlPostRepository implements PostRepository
 
     public function persist(Post $post): void
     {
-        $data = $this->hydrator->extract($post, ['id', 'date', 'title'])
+        $data = $this->hydrator->extract($post, ['id', 'date', 'title']);
     
         $this->db->insert('posts', [
             'id' => $data['id'],
             'create_date' => $data['date']->format('Y-m-d'),
             'title' => $data['title'],
-        );
+        ]);
     }
 }
 ```
